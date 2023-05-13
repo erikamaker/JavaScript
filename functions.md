@@ -18,6 +18,11 @@ function sayHello() {
 }
 ```
 
+```
+const myText = "I am a string";
+const newString = myText.replace("string", "sausage");
+```
+
 - Functions can have multiple parameters or no parameters at all.
 
 ```
@@ -29,10 +34,13 @@ sayHello();    // Output: Hello!
 - The code inside a function is executed when the function is called or invoked.
 
 ```
-// Function execution
-function add(a, b) {
-  return a + b;
+function myFunction() {
+  alert("hello");
 }
+
+myFunction();
+// calls the function once
+
 ```
 
 - Functions can return values using the `return` statement.
@@ -94,6 +102,15 @@ sayGoodbye();   // Output: Goodbye!
 ```
 // Arrow function
 const multiply = (a, b) => a * b;
+```
+
+If you weren't aware of this nuance, you might have written it like so:
+
+```
+// Regular function
+const multiply = function(a, b) {
+  return a * b;
+};
 ```
 
 - Functions can also be nested within other functions, creating a concept called closures.
@@ -205,3 +222,100 @@ customFunction(); // Output: Executing custom function
 - JavaScript functions have a special keyword `this` to refer to the object that called the function, while Ruby methods have the `self` keyword for the same purpose.
 - While both JavaScript and Ruby provide built-in functions/methods, you can also define your own custom functions/methods in both languages.
 - `this` is to JS as `self` is to Ruby.
+
+
+
+# The difference between a JS Function and a JS Method (Despite my comparison above, JS does have both)
+
+Here's a simple example illustrating the differences between functions and methods in JavaScript:
+
+```
+// Standalone function
+function sayHello() {
+  console.log("Hello!");
+}
+
+sayHello(); // Output: Hello!
+
+// Object with a method
+const person = {
+  name: "John",
+  greet: function() {
+    console.log("Hello, my name is " + this.name);
+  }
+};
+
+person.greet(); // Output: Hello, my name is John
+```
+
+In this example, we have a standalone function called sayHello. It is defined independently and can be called directly by its name sayHello(). The function has its own scope and can be invoked from anywhere in the code.
+
+On the other hand, we have an object person with a method greet. The greet method is defined within the person object and is accessed using dot notation (person.greet()). When person.greet() is invoked, the function code inside the method is executed, and this.name refers to the name property of the person object.
+
+The key differences between the standalone function and the method are:
+
+1. Invocation: The standalone function is invoked directly by its name (sayHello()), while the method is invoked on the object (person.greet()).
+2. Scope: The standalone function has its own scope, while the method can access the object's properties using this.
+3. Relationship to Objects: The standalone function is not tied to any specific object, while the method is associated with and operates on the person object.
+
+By understanding these differences, you can leverage functions as reusable code blocks and methods as behavior tied to specific objects.
+
+
+# All About Scope
+
+- Scope is an important concept in JavaScript that determines the accessibility of variables and other things defined within functions.
+- When you create a function, the variables and other elements defined inside the function have their own separate scope and are not directly accessible from outside the function.
+- The top-level scope, outside all functions, is called the global scope, and values defined in the global scope are accessible from anywhere in the code.
+- JavaScript uses scope to provide security and organization. It prevents variables from being accessed and modified unintentionally by external scripts or conflicting with variable names in other parts of the code.
+
+In summary, scope in JavaScript ensures that variables and elements are encapsulated within their respective functions, avoiding conflicts and unwanted modifications. The global scope allows for the accessibility of values across the code, while function scopes provide isolation and protection. The concept of scope in JavaScript is similar to other object-oriented programming languages like Ruby.
+
+In both languages, scope determines the visibility and accessibility of variables and other elements within functions or methods. The global scope in JavaScript is akin to the top-level scope in Ruby, where variables and elements defined outside of any specific class or method can be accessed throughout the code. Similarly, both languages provide local scopes within functions or methods, where variables and elements are encapsulated and can only be accessed within their respective scopes. This helps prevent naming conflicts and provides a level of organization and security.
+
+While the concept of scope is common across many programming languages, the specific rules and behaviors surrounding scope can vary. It's important to understand the nuances and specific scope rules of each language when working with variables and functions to avoid any unexpected behavior. So, although the concept of scope is not unique to JavaScript and can be found in other object-oriented languages like Ruby, the exact rules and syntax for scoping may differ.
+
+
+# Return Values
+
+Return Values are intuitively named-- they're the returned values of a function.
+
+- Return values are the values that a function produces or sends back as the output after performing its operations.
+- In JavaScript, you can use the `return` statement to specify the return value of a function.
+- When a `return` statement is encountered, the function stops executing and immediately exits, returning the specified value.
+- Functions can return different types of values, including numbers, strings, booleans, objects, or even other functions.
+- You can capture and store the return value of a function by assigning it to a variable or using it directly.
+- If a function does not have a `return` statement, it implicitly returns `undefined`.
+- Multiple `return` statements can be used within a function, but only the first encountered `return` statement will be executed.
+- Example code:
+
+```javascript
+// Function with a return value
+function add(a, b) {
+  return a + b;
+}
+
+const result = add(3, 5);
+console.log(result); // Output: 8
+
+// Function with no return statement
+function greet(name) {
+  console.log("Hello, " + name);
+}
+
+const greeting = greet("John");
+console.log(greeting); // Output: Hello, John
+                        //        undefined
+```
+
+In this code example, we have a function `add` that takes two parameters and returns their sum using the `return` statement. The returned value is stored in the variable `result` and then printed to the console.
+
+We also have a function `greet` that does not have a `return` statement. It simply logs a greeting message to the console. When invoking `greet("John")`, the message is displayed, but since there is no explicit return value, it implicitly returns `undefined`. This is assigned to the variable `greeting` and printed to the console.
+
+These examples showcase how return values allow functions to produce output that can be used in further computations or stored for later use.
+
+
+
+
+## PICK UP ON ITEM #3 OF
+
+https://www.theodinproject.com/lessons/foundations-fundamentals-part-3
