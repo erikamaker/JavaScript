@@ -39,6 +39,7 @@ function add(a, b) {
 
 ```
 // Function return value
+// the return statement is crucial for outputting the value of a * b
 function multiply(a, b) {
   return a * b;
 }
@@ -68,6 +69,11 @@ function greet() {
 ```
 
 - Function declarations have a name and are hoisted to the top of their scope, meaning they can be called before they are defined.
+
+- In JavaScript, function declarations are hoisted to the top of their scope, which means they can be called before they are defined in the code. This allows you to call a function declaration even if it appears later in the code.
+
+- This behavior differs from Ruby, where methods are not hoisted. In Ruby, methods must be defined before they are called; otherwise, an error will occur. The only exception to this is when methods are defined within a class. In Ruby, methods defined within a class are available for use once the class is initialized, allowing you to call them on instances of that class.
+
 
 ```
 // Function expression
@@ -103,15 +109,40 @@ function outerFunction() {
 
   return innerFunction;
 }
-```
 
-- Closures allow inner functions to access variables and parameters from their outer functions, even after the outer functions have completed execution.
-
-```
 const greet = outerFunction();
 greet("John"); // Output: Hello, John
 ```
 
+In this example, we have the function outerFunction that defines an inner function called innerFunction. The outerFunction has a variable message which stores the string "Hello, ".
+
+When outerFunction is called and executed, it returns the innerFunction without executing it. The returned innerFunction maintains access to the message variable due to closure, even after the outerFunction has completed execution.
+
+By assigning the returned innerFunction to the variable greet, we can later invoke greet("John"), passing the name "John" as an argument. The inner function combines the message and the provided name, resulting in the output "Hello, John".
+
+This demonstrates how closures allow inner functions to access variables from their outer functions, even after the outer functions have finished executing.
+
+- Closures allow inner functions to access variables and parameters from their outer functions, even after the outer functions have completed execution. Another example
+
+```
+// Function that creates a greeting function
+function createGreeting(name) {
+  return function() {
+    console.log("Hello, " + name);
+  };
+}
+
+const greetErika = createGreeting("Erika");
+greetErika(); // Output: Hello, Erika
+```
+
+In this updated example, we have a function createGreeting that takes a name parameter. Inside createGreeting, it returns an inner function that logs a greeting message using the name parameter from the outer scope.
+
+By calling createGreeting("Erika"), it returns the inner function that still has access to the name variable, even though createGreeting has finished executing. We assign this returned inner function to the variable greetErika.
+
+Finally, when we invoke greetErika(), it executes the inner function, which logs the greeting message "Hello, Erika" to the console. The inner function maintains access to the name variable in its outer scope, thanks to closure.
+
+This example demonstrates closure by showing how the inner function preserves access to variables from its outer scope, even after the outer function has completed execution.
 
 
 - Functions can also take other functions as parameters, enabling higher-order functions.
@@ -173,3 +204,4 @@ customFunction(); // Output: Executing custom function
 - Both functions in JavaScript and methods in Ruby can have parameters and return values.
 - JavaScript functions have a special keyword `this` to refer to the object that called the function, while Ruby methods have the `self` keyword for the same purpose.
 - While both JavaScript and Ruby provide built-in functions/methods, you can also define your own custom functions/methods in both languages.
+- `this` is to JS as `self` is to Ruby.
