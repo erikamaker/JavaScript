@@ -277,6 +277,7 @@ While the concept of scope is common across many programming languages, the spec
 
 # Return Values
 
+
 Return Values are intuitively named-- they're the returned values of a function.
 
 - Return values are the values that a function produces or sends back as the output after performing its operations.
@@ -288,7 +289,7 @@ Return Values are intuitively named-- they're the returned values of a function.
 - Multiple `return` statements can be used within a function, but only the first encountered `return` statement will be executed.
 - Example code:
 
-```javascript
+```
 // Function with a return value
 function add(a, b) {
   return a + b;
@@ -316,6 +317,3 @@ These examples showcase how return values allow functions to produce output that
 
 
 
-## PICK UP ON ITEM #3 OF
-
-https://www.theodinproject.com/lessons/foundations-fundamentals-part-3
