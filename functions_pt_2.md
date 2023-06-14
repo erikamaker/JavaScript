@@ -181,6 +181,9 @@ function doubleItem(item) {
 ```
 
 
+# ARROW FUNCTIONS
+
+
 # OTHER SCOPE-RELATED SHORTCUTS
 
 ```
@@ -264,3 +267,147 @@ If no return statement is specified, the function returns undefined by default.
 
 Function names should be descriptive and represent what the function does.
 Function names must be valid identifiers and follow the same naming rules as variable names.
+
+
+
+
+# FUNCTION DECLARATION vs. FUNCTION EXPRESSION
+
+There is a difference between the two. A declaration looks like this:
+
+```
+function sayHi() {
+  alert( "Hello" );
+}
+```
+
+while an expression looks like this:
+
+```
+let sayHi = function() {
+  alert( "Hello" );
+};
+```
+
+The latter of the two allows us to create a new function in the middle of any expression. As the function creation happens in the context of the assignment expression (to the right side of =), this is a Function Expression. Please note, there’s no name after the function keyword. Omitting a name is allowed for Function Expressions.
+
+Here are the core concepts of Function Expressions vs Function Declarations:
+
+1. Function Declarations:
+   - Function declarations are statements that define a named function using the `function` keyword.
+   - They are hoisted, meaning they can be called before they are declared in the code.
+   - The function name is mandatory and can be used to call the function from anywhere in the scope.
+
+2. Function Expressions:
+   - Function expressions define a function as part of a larger expression, usually by assigning it to a variable.
+   - They are not hoisted, so they can only be called after they have been defined.
+   - The function can be anonymous (no name) or have a name, although the name is usually not used to call the function.
+
+3. Usage and Syntax:
+   - Function Declarations can be used as standalone functions or as methods on objects.
+   - Function Expressions can be used as function arguments, assigned to variables, or used as IIFE (Immediately Invoked Function Expressions).
+   - The syntax for a Function Declaration is: `function functionName() { /* function body */ }`.
+   - The syntax for a Function Expression is: `const functionName = function() { /* function body */ }`.
+
+4. Differences:
+   - Hoisting: Function Declarations are hoisted, so they can be called before they are declared. Function Expressions are not hoisted and cannot be called before they are assigned.
+   - Names: Function Declarations require a name, which can be used to call the function. Function Expressions can be anonymous or have a name, but the name is typically not used for calling.
+   - Usage: Function Declarations can be used as standalone functions or as methods on objects. Function Expressions are often used as function arguments, assigned to variables, or used as IIFE.
+
+
+
+# A FUNCTION IS A VALUE
+
+No matter how the function is created, a function is a value. Both examples above store a function in the sayHi variable.
+
+For instance, if you run this code, the alert will show the method syntax itself.
+
+```
+function sayHi() {
+  alert( "Hello" );
+}
+
+alert( sayHi ); // shows the function code
+```
+
+Please note that the last line does not run the function, because there are no parentheses after sayHi. There are programming languages where any mention of a function name causes its execution, but JavaScript is not like that.
+
+Because a function is a value, we can copy it to another variable and both would yield the same value:
+
+```
+function sayHi() {   // (1) create
+  alert( "Hello" );
+}
+
+let func = sayHi;    // (2) copy
+
+func(); // Hello     // (3) run the copy (it works)!
+sayHi(); // Hello    //     this still works too (why wouldn't it)
+```
+
+We also could use a function expression to declare `sayHi`:
+
+```
+let sayHi = function() { // (1) create
+  alert( "Hello" );
+};
+
+let func = sayHi;
+// ...
+```
+
+
+# A NOTE ABOUT SEMICOLONS
+
+You might wonder, why do Function Expressions have a semicolon ; at the end, but Function Declarations do not: this is because a Function Expression is created as function(…) {…} inside the assignment statement: let sayHi = …;. The semicolon ; is recommended at the end of the statement, it’s not a part of the function syntax. The semicolon would be there for a simpler assignment, such as let sayHi = 5;, and it’s also there for a function assignment.
+
+
+
+# CALL STACKS
+
+
+1. Call Stack:
+   - The call stack is a data structure used by JavaScript to keep track of function calls.
+   - It follows the Last-In-First-Out (LIFO) principle, meaning that the last function called is the first one to be executed and completed.
+   - Whenever a function is called, a new frame is created and pushed onto the call stack. When a function completes, its frame is popped from the stack.
+
+Think of the call stack as a stack of plates. When you call a function, you put a new plate on top of the stack. When the function finishes, its plate is removed from the top.
+
+2. Function Invocation and Execution:
+   - When a function is invoked (called), a new frame is created and pushed onto the call stack.
+   - The function's code is then executed sequentially, and any nested function calls also result in new frames being pushed onto the call stack.
+   - Each frame represents a function call and contains information such as the function's arguments, local variables, and the location to return to after the function completes.
+
+Picture a line of people waiting to go down a slide. When it's your turn, you slide down, and others wait until you finish. Inside the slide, there might be more slides that people use one after another.
+
+3. Stack Overflow:
+   - A stack overflow occurs when the call stack exceeds its maximum size.
+   - This can happen if there is excessive recursion (a function calling itself repeatedly) or if there is an infinite loop that doesn't terminate.
+   - When a stack overflow occurs, the browser or JavaScript engine throws an error, indicating that the call stack has exceeded its capacity.
+
+Imagine building a tower with blocks, but you keep adding blocks without stopping. Eventually, the tower gets so tall that it falls over because it can't support its own weight.
+
+4. Asynchronous Operations and Callback Queue:
+   - JavaScript supports asynchronous operations such as setTimeout, AJAX requests, and event handlers.
+   - When an asynchronous operation is encountered, it is offloaded to the browser or JavaScript engine, and the function immediately continues executing without waiting for the operation to complete.
+   - Once the asynchronous operation is finished, a callback function is added to the callback queue.
+   - The event loop continuously checks the call stack and if it's empty, it takes the next callback from the callback queue and pushes it onto the call stack for execution.
+
+Think of it as cooking multiple dishes simultaneously. While one dish is simmering on the stove, you can start preparing another dish.
+
+5. Debugging the Call Stack:
+   - Understanding the call stack is essential for debugging JavaScript code.
+   - By examining the call stack, you can trace the order in which functions were called and identify any errors or unexpected behavior.
+   - Most modern browsers provide developer tools with a built-in debugger that allows you to pause the execution at a specific point and inspect the call stack.
+
+Debugging the call stack is like following a treasure map with clues to find a hidden treasure. You carefully check each clue to see where it leads.
+
+
+
+
+
+
+
+ALL DONE STUDYING THIS SECTION. PICK UP ON THE ASSIGNMENTS SECTION AT:
+
+https://www.theodinproject.com/lessons/foundations-fundamentals-part-3
